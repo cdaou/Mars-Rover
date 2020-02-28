@@ -4,7 +4,7 @@ public class calculateOutput {
 	
 	protected  ArrayList<Integer> coordinates = new ArrayList<Integer>();
 	protected  ArrayList<String> currentPosition = new ArrayList<String>();
-	protected  ArrayList<String> moves = new ArrayList<String>();	
+	protected  ArrayList<Character> moves = new ArrayList<Character>();	
 	
 	public calculateOutput(ArrayList<Integer> coordinates) {
 		this.coordinates = coordinates;
@@ -14,21 +14,17 @@ public class calculateOutput {
 	public String[] calculateOut(){
 		int[] nextPosition = new int[2];
 		String direction = currentPosition.get(2);
-		System.out.println(moves.get(0).charAt(2));
-		for(int i=0; i < moves.get(0).length(); i++) {
-			switch(moves.get(0).charAt(i)){
+		for(int i=0; i < moves.size(); i++) {
+			switch(moves.get(i)){
 			case 'M':
 				nextPosition = makeMove(direction, Integer.parseInt(currentPosition.get(0)), Integer.parseInt(currentPosition.get(1)));
 				break;
 			default:
-				direction = newDirection(direction, moves.get(0).charAt(i));
+				direction = newDirection(direction, moves.get(i));
 			}
 		}	
-		System.out.println(nextPosition[0]);
-		System.out.println(direction);
-		
 		String finalPosition[] = {String.valueOf(nextPosition[0]), String.valueOf(nextPosition[1]), direction};
-		System.out.println(finalPosition[0]+finalPosition[1]+finalPosition[2]);
+		System.out.println(finalPosition[0]+" "+finalPosition[1]+" "+finalPosition[2]);
 		return finalPosition;
 	}
 	
@@ -57,31 +53,31 @@ public class calculateOutput {
 		return newCoord;
 	}
 
-	protected String newDirection(String previousDirection, String rotation) {
+	protected String newDirection(String previousDirection, Character rotation) {
 		
 		String newDirection = "";
 		
 		switch(previousDirection) {
 		case "N":
-			if(rotation.equals("L"))
+			if(rotation.equals('L'))
 				newDirection = "W";
 			else
 				newDirection = "E";
 			break;
 		case "E":
-			if(rotation.equals("L"))
+			if(rotation.equals('L'))
 				newDirection = "N";
 			else
 				newDirection = "S";
 			break;
 		case "S":
-			if(rotation.equals("L"))
+			if(rotation.equals('L'))
 				newDirection = "E";
 			else
 				newDirection = "W";
 			break;
 		case "W":
-			if(rotation.equals("L"))
+			if(rotation.equals('L'))
 				newDirection = "S";
 			else
 				newDirection = "N";
@@ -94,7 +90,7 @@ public class calculateOutput {
 		this.currentPosition = position;
 	}
 	
-	public void setMoves(ArrayList<String> moves) {
+	public void setMoves(ArrayList<Character> moves) {
 		this.moves = moves;
 	}	
 }

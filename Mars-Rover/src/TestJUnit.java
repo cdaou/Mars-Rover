@@ -1,5 +1,5 @@
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,18 +15,20 @@ public class TestJUnit {
 	@Test
 	public void testCase1() {
 		ArrayList<String> position = new ArrayList<String>();
-		ArrayList<String> moves = new ArrayList<String>();
+		ArrayList<Character> moves = new ArrayList<Character>();
 		data = readMoves();
 		position.add(data.get(0).get(0));
 		position.add(data.get(0).get(1));
 		position.add(data.get(0).get(2));
-		moves.add(data.get(0).get(3));
+		for(int i=0; i < data.get(0).get(3).length(); i++) {
+			moves.add(data.get(0).get(3).charAt(i));
+		};
 		calculateOutput finalPosition = new calculateOutput(coordinates);
 		finalPosition.setPosition(position);
 		finalPosition.setMoves(moves);
-		assertEquals("1", finalPosition.calculateOut()[0], "The x co-ordinate must be equal to 1");
-		assertEquals("3", finalPosition.calculateOut()[1], "The y co-ordinate must be equal to 3");
-		assertEquals("N", finalPosition.calculateOut()[2], "The direction must be equal to N");
+		assertTrue("1".equals(finalPosition.calculateOut()[0]));
+		assertTrue("3".equals(finalPosition.calculateOut()[1]));
+		assertTrue("N".equals(finalPosition.calculateOut()[2]));
 	}
 	
 	//------------------>READ MOVES FUNCTION<------------------
