@@ -8,18 +8,85 @@ import java.util.HashMap;
 
 public class calculateOutput {
 	
-	public static ArrayList<Integer> coordinates = new ArrayList<Integer>();
+	protected static ArrayList<Integer> coordinates = new ArrayList<Integer>();
 
 	public static void main(String[] args) {
 		
 		HashMap<Integer, ArrayList<String>> moves = new HashMap<>();
 		
-		moves = readMoves();
-		System.out.println(moves);
+		
 
 	}
 	
-	protected static  HashMap<Integer, ArrayList<String>> readMoves(){
+	//------------------>CALCULATE OUTPUT FUNCTION<------------------
+	private static  HashMap<Integer, ArrayList<String>> calculateOutput(HashMap<Integer, ArrayList<String>> moves){
+		
+		HashMap<Integer, ArrayList<String>> finalPosition = new HashMap<>();
+				
+		
+		return finalPosition;
+	}
+	
+	protected static  int[] makeMove (String direction, int x, int y) {
+		
+		int[] newCoord = new int[2];
+		
+		switch(direction) {
+		case "N":
+			newCoord[0] = x;
+			newCoord[1] = ++y;
+			break;
+		case "E":
+			newCoord[0] = ++x;
+			newCoord[1] = y;
+			break;
+		case "S":
+			newCoord[0] = x;
+			newCoord[1] = --y;
+			break;
+		case "W":
+			newCoord[0] = --x;
+			newCoord[1] = y;
+			break;
+		}
+		return newCoord;
+	}
+
+	protected String newDirection(String previousDirection, String rotation) {
+		
+		String newDirection = "";
+		
+		switch(previousDirection) {
+		case "N":
+			if(rotation.equals("L"))
+				newDirection = "W";
+			else
+				newDirection = "E";
+			break;
+		case "E":
+			if(rotation.equals("L"))
+				newDirection = "N";
+			else
+				newDirection = "S";
+			break;
+		case "S":
+			if(rotation.equals("L"))
+				newDirection = "E";
+			else
+				newDirection = "W";
+			break;
+		case "W":
+			if(rotation.equals("L"))
+				newDirection = "S";
+			else
+				newDirection = "N";
+			break;
+		}
+		return newDirection;
+	}
+	
+	//------------------>READ MOVES FUNCTION<------------------
+	private static  HashMap<Integer, ArrayList<String>> readMoves(){
 		//INITIALIZE VARIABLES
 		BufferedReader inputFile;
 		String line;
