@@ -1,33 +1,38 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class calculateOutput {
 	
-	protected static ArrayList<Integer> coordinates = new ArrayList<Integer>();
-
-	public static void main(String[] args) {
-		
-		HashMap<Integer, ArrayList<String>> moves = new HashMap<>();
-		
-		
-
+	protected  ArrayList<Integer> coordinates = new ArrayList<Integer>();
+	protected  ArrayList<String> currentPosition = new ArrayList<String>();
+	protected  ArrayList<String> moves = new ArrayList<String>();	
+	
+	public calculateOutput(ArrayList<Integer> coordinates) {
+		this.coordinates = coordinates;
 	}
 	
 	//------------------>CALCULATE OUTPUT FUNCTION<------------------
-	private static  HashMap<Integer, ArrayList<String>> calculateOutput(HashMap<Integer, ArrayList<String>> moves){
+	public String[] calculateOut(){
+		int[] nextPosition = new int[2];
+		String direction = currentPosition.get(2);
+		System.out.println(moves.get(0).charAt(2));
+		for(int i=0; i < moves.get(0).length(); i++) {
+			switch(moves.get(0).charAt(i)){
+			case 'M':
+				nextPosition = makeMove(direction, Integer.parseInt(currentPosition.get(0)), Integer.parseInt(currentPosition.get(1)));
+				break;
+			default:
+				direction = newDirection(direction, moves.get(0).charAt(i));
+			}
+		}	
+		System.out.println(nextPosition[0]);
+		System.out.println(direction);
 		
-		HashMap<Integer, ArrayList<String>> finalPosition = new HashMap<>();
-				
-		
+		String finalPosition[] = {String.valueOf(nextPosition[0]), String.valueOf(nextPosition[1]), direction};
+		System.out.println(finalPosition[0]+finalPosition[1]+finalPosition[2]);
 		return finalPosition;
 	}
 	
-	protected static  int[] makeMove (String direction, int x, int y) {
+	protected int[] makeMove (String direction, int x, int y) {
 		
 		int[] newCoord = new int[2];
 		
@@ -84,47 +89,12 @@ public class calculateOutput {
 		}
 		return newDirection;
 	}
-	
-	//------------------>READ MOVES FUNCTION<------------------
-	private static  HashMap<Integer, ArrayList<String>> readMoves(){
-		//INITIALIZE VARIABLES
-		BufferedReader inputFile;
-		String line;
-		int lineIndex = 1, moveIndex = 0;
-		ArrayList<String> tempList = new ArrayList<>();
-		HashMap<Integer, ArrayList<String>> moves = new HashMap<>();
-		//READ THE INPUT FILE
-		try {	
-			inputFile = new BufferedReader(new FileReader("./src/inputFile.txt"));
-			line = inputFile.readLine();
-			while (line != null) {
-				String[] splitStrings = line.split(" ");
-				if(lineIndex == 1) {
-					for (String s : splitStrings) 
-						coordinates.add(Integer.parseInt(s));
-				}else{
-					for (String s : splitStrings) 
-						tempList.add(s);
-					if(lineIndex%2==1) {
-						moves.put(moveIndex++, tempList);
-						tempList = new ArrayList<>();
-					}
-				}
-				line = inputFile.readLine();
-				lineIndex++;	
-			}
-			if(inputFile!=null)
-				inputFile.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("Input file(s) not found. Try again!");
-			e.printStackTrace();
-			System.exit(0);
-		} catch (IOException e) {
-			System.out.println("Something went wrong, reading the file(s). Try again!");
-			e.printStackTrace();
-			System.exit(0);
-		}	
-		return moves;
+		
+	public void setPosition(ArrayList<String> position) {
+		this.currentPosition = position;
 	}
 	
+	public void setMoves(ArrayList<String> moves) {
+		this.moves = moves;
+	}	
 }
