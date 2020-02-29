@@ -12,7 +12,7 @@ public class calculateOutput {
 	}
 	
 	//------------------>CALCULATE OUTPUT FUNCTION<------------------
-	public char[] calculateOut(){
+	public String[] calculateOut(){
 		int[] currentPosition = new int[2]; //X,Y COORDINATES OF THE ROVER
 		char direction = initialPosition.get(2).charAt(0); //THE INITIAL DIRECTION OF THE ROVER (N,W,S,E)
 		currentPosition[0]=Integer.parseInt(initialPosition.get(0));
@@ -31,7 +31,7 @@ public class calculateOutput {
 		}	
 		//finalPosition IS AN ARRAY WITH THE INFORMATION OF THE FINAL POSITION, THAT IS (X,Y,DIRECTION)
 		//THIS VARIABLE CONTAINS STRINGS
-		char finalPosition[] = {(char) (currentPosition[0] + '0'), (char) (currentPosition[1]+'0'),direction};
+		String finalPosition[] = { Integer.toString(currentPosition[0]), Integer.toString(currentPosition[1]) , String.valueOf(direction)};
 		System.out.println(finalPosition[0]+" "+finalPosition[1]+" "+finalPosition[2]);
 		return finalPosition;
 	}
@@ -59,6 +59,12 @@ public class calculateOutput {
 				newCoord[0] = --x;
 				newCoord[1] = y;
 				break;
+		}
+		//CHECK IF THIS PATH GUIDES THE ROBOT OUT OF BOUNDS
+		if( (coordinates.get(0)-Math.abs(newCoord[0])<0) || (coordinates.get(1)-Math.abs(newCoord[1])<0) ){
+			System.out.println("ÁÔÔÅÍÔÉÏÍ! \nÔhis path is not allowed because the robot will go out of bounds. \nThe system will shut down and please try another path.");
+			System.out.println(moves);
+			System.exit(0);
 		}
 		return newCoord;
 	}

@@ -33,13 +33,13 @@ public class TestJUnit {
 		//PASS THE INFORMATION NEEDED
 		finalPosition.setPosition(position);
 		finalPosition.setMoves(nextMove);
-		char result[] = new char[3];
+		String result[] = new String[3];
 		//SAVE THE RESULT OF THE CALCULATION
 		result=finalPosition.calculateOut();
 		//TEST IF THE RESULT IS THE DESIRED
-		assertTrue(result[0]=='1');
-		assertTrue(result[1]=='3');
-		assertTrue(result[2]=='N');
+		assertTrue(result[0].equals("1"));
+		assertTrue(result[1].equals("3"));
+		assertTrue(result[2].equals("N"));
 	}
 	
 	@Test
@@ -60,11 +60,11 @@ public class TestJUnit {
 		calculateOutput finalPosition = new calculateOutput(coordinates);
 		finalPosition.setPosition(position);
 		finalPosition.setMoves(nextMove);
-		char result[] = new char[3];
+		String result[] = new String[3];
 		result=finalPosition.calculateOut();
-		assertTrue(result[0]=='5');
-		assertTrue(result[1]=='1');
-		assertTrue(result[2]=='E');
+		assertTrue(result[0].equals("5"));
+		assertTrue(result[1].equals("1"));
+		assertTrue(result[2].equals("E"));
 	}
 	
 	//------------------>readNextMove() FUNCTION<------------------
