@@ -8,7 +8,12 @@ The rest of the input is information pertaining to the rovers that have been dep
 The position is made up of two integers and a letter separated by spaces, corresponding to the x and y co-ordinates and the rover’s orientation.
 Each rover will be finished sequentially, which means that the second rover won’t start to move until the first one has finished moving.
 
-# Installing
+#### Contents:
+The project contains three classes and the input text file. The main class in which the output is calculated is the calculateOutput class. The classes that are implemented to perform automated tests are MyTest and TestJUnit. The class MyTest contains the Java main method, which is used to run the tests and the TestJUnit is used to implement the scenarios tests and read the input information
+from the file. More details on variables, program and design logic are explained in the code comments.
+
+
+# Setup
 You must have the following to run this project:
 * JRE System Library [JavaSE-1.8]
 * JUnit 4
