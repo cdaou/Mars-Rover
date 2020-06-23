@@ -37,3 +37,8 @@ MMRMMRMRRM
 5 1 E
 
 To run the two automated tests you need to run the *Java main Method* of the *MyTest class*.
+
+# License
+
+Copyright 2020 Christos Daoulas
+Licensed under the Apache License, Version 2.0 (the "License");
